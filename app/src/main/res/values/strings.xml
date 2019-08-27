@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Bink</string>
+    <string name="category_image">Category image</string>
 </resources>

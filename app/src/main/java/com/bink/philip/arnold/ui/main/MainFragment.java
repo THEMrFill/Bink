@@ -1,5 +1,6 @@
 package com.bink.philip.arnold.ui.main;
 
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +23,8 @@ import com.bink.philip.arnold.retrofit.RetrofitFactory;
 public class MainFragment extends Fragment implements MainFragmentInterface {
     private String TAG = getClass().getSimpleName();
     private MainViewModel mViewModel;
+    private RecyclerView recycler;
+    private ContentLoadingProgressBar progressBar;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -29,7 +34,14 @@ public class MainFragment extends Fragment implements MainFragmentInterface {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+        View view = inflater.inflate(R.layout.main_fragment, container, false);
+        recycler = view.findViewById(R.id.recycler);
+        recycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        recycler.setAdapter(new MainAdapter(new Categories()));
+
+        progressBar = view.findViewById(R.id.progressBar);
+
+        return view;
     }
 
     @Override
@@ -47,7 +59,7 @@ public class MainFragment extends Fragment implements MainFragmentInterface {
 
     @Override
     public void returnCategories(Categories categories) {
-        Log.d(TAG, "categories=" + categories.categories.toString());
+        ((MainAdapter)recycler.getAdapter()).resetData(categories);
     }
 
     @Override
