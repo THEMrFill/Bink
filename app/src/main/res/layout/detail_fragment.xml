@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/thumb"
+            android:layout_width="@dimen/thumbWidth"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mainMargin"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginEnd="@dimen/mainMargin"
+            android:contentDescription="@string/recipe_thumb"
+            />
+
+        <TextView
+            android:id="@+id/meal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mainMargin"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginEnd="@dimen/mainMargin"
+            android:textSize="@dimen/header"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mainMargin"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginEnd="@dimen/mainMargin" />
+
+        <TextView
+            android:id="@+id/area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mainMargin"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginEnd="@dimen/mainMargin" />
+
+        <TextView
+            android:id="@+id/instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mainMargin"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginEnd="@dimen/mainMargin"
+            android:inputType="textMultiLine"
+            />
+
+        <TextView
+            android:id="@+id/tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mainMargin"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginEnd="@dimen/mainMargin" />
+
+        <TextView
+            android:id="@+id/video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mainMargin"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginEnd="@dimen/mainMargin"
+            android:linksClickable="true"
+            android:autoLink="web"
+            />
+
+        <TextView
+            android:id="@+id/ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/mainMargin"
+            android:layout_marginTop="@dimen/mainMargin"
+            android:layout_marginEnd="@dimen/mainMargin"
+            android:text="@string/ingredients"
+            android:visibility="gone"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mainMargin" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
