@@ -119,14 +119,14 @@ public class DetailFragment extends Fragment implements MainFragmentInterface {
         }
     }
 
-    private void textDisplayer(TextView view, String value) {
+    void textDisplayer(TextView view, String value) {
         if (value != null && value.length() > 0) {
             view.setText(value);
         } else {
             view.setVisibility(View.GONE);
         }
     }
-    private Spanned formatInstructions(String value) {
+    Spanned formatInstructions(String value) {
         if (value == null)
             return null;
         value = value.replace("\r\n\r\n", "\r\n");

@@ -8,4 +8,12 @@ public class Ingredient {
 
     public String ingredient;
     public String measure;
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "ingredient='" + ingredient + '\'' +
+                ", measure='" + measure + '\'' +
+                '}';
+    }
 }
