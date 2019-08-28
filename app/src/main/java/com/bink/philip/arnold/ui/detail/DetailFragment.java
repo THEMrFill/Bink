@@ -100,13 +100,15 @@ public class DetailFragment extends Fragment implements MainFragmentInterface {
             final Meal thisMeal = item.getMeals().get(0);
             thisMeal.makeIngredients();
 
+            mainActivityInterface.setTitle(thisMeal.strMeal, true);
+
             Glide.with(thumb)
                     .load(thisMeal.strMealThumb)
                     .into(thumb);
 
             textDisplayer(meal, thisMeal.strMeal);
-            textDisplayer(category, thisMeal.strCategory);
-            textDisplayer(area, thisMeal.strArea);
+            textDisplayer(category, "");
+            textDisplayer(area, String.format("%s, %s", thisMeal.strArea, thisMeal.strCategory));
             textDisplayer(tags, thisMeal.strTags);
             textDisplayer(video, thisMeal.strYoutube);
             instructions.setText(formatInstructions(thisMeal.strInstructions));
@@ -127,8 +129,8 @@ public class DetailFragment extends Fragment implements MainFragmentInterface {
     private Spanned formatInstructions(String value) {
         if (value == null)
             return null;
-        value.replace("\r\n\r\n", "\r\n");
-        value.replace("\n", "<p>");
+        value = value.replace("\r\n\r\n", "\r\n");
+        value = value.replace("\n", "<p>");
         return Html.fromHtml(value);
     }
 

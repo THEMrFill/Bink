@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Bink</string>
     <string name="category_image">Category image</string>
-    <string name="select_a_meal_category">select a meal category</string>
+    <string name="select_a_meal_category">Select a meal category</string>
     <string name="ingredients">Ingredients</string>
     <string name="recipe_thumb">Recipe thumb</string>
 </resources>

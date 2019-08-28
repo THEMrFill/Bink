@@ -49,7 +49,7 @@ public class MealListFragment extends Fragment implements MainFragmentInterface 
 
         progressBar = view.findViewById(R.id.progressBar);
 
-        mainActivityInterface.setTitle(category);
+        mainActivityInterface.setTitle(category, true);
 
         return view;
     }
