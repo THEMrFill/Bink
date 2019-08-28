@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Bink</string>
     <string name="category_image">Category image</string>
+    <string name="select_a_meal_category">select a meal category</string>
 </resources>

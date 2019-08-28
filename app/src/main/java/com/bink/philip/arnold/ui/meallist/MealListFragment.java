@@ -1,20 +1,17 @@
-package com.bink.philip.arnold.ui.main;
-
-import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.lifecycle.ViewModelProviders;
+package com.bink.philip.arnold.ui.meallist;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bink.philip.arnold.MainActivityInterface;
 import com.bink.philip.arnold.R;
@@ -22,21 +19,23 @@ import com.bink.philip.arnold.model.Categories;
 import com.bink.philip.arnold.model.MealSingle;
 import com.bink.philip.arnold.model.Meals;
 import com.bink.philip.arnold.retrofit.RetrofitFactory;
+import com.bink.philip.arnold.ui.main.MainAdapter;
+import com.bink.philip.arnold.ui.main.MainFragmentInterface;
 
-public class MainFragment extends Fragment implements MainFragmentInterface {
-    private MainViewModel mViewModel;
+public class MealListFragment extends Fragment implements MainFragmentInterface {
+    private String category;
+    private MainActivityInterface mainActivityInterface;
     private RecyclerView recycler;
     private ContentLoadingProgressBar progressBar;
-    private MainActivityInterface mainActivityInterface;
-
     private RetrofitFactory retrofitFactory = new RetrofitFactory();
 
-    public MainFragment(MainActivityInterface mainActivityInterface) {
+    public MealListFragment(String category, MainActivityInterface mainActivityInterface) {
+        this.category = category;
         this.mainActivityInterface = mainActivityInterface;
     }
 
-    public static MainFragment newInstance(MainActivityInterface mainActivityInterface) {
-        return new MainFragment(mainActivityInterface);
+    public static MealListFragment newInstance(String category, MainActivityInterface mainActivityInterface) {
+        return new MealListFragment(category, mainActivityInterface);
     }
 
     @Nullable
@@ -46,20 +45,13 @@ public class MainFragment extends Fragment implements MainFragmentInterface {
         View view = inflater.inflate(R.layout.main_fragment, container, false);
         recycler = view.findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        recycler.setAdapter(new MainAdapter(new Categories(), mainActivityInterface));
+        recycler.setAdapter(new MealListAdapter(new Meals(), mainActivityInterface));
 
         progressBar = view.findViewById(R.id.progressBar);
 
-        mainActivityInterface.setTitle(getString(R.string.select_a_meal_category));
+        mainActivityInterface.setTitle(category);
 
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
     }
 
     @Override
@@ -69,22 +61,23 @@ public class MainFragment extends Fragment implements MainFragmentInterface {
     }
 
     private void getData() {
-        progressBar.show();
-        retrofitFactory.getCategories(this);
+        retrofitFactory.getMeals(category, this);
     }
 
     @Override
     public void returnCategories(Categories categories) {
-        progressBar.hide();
-        ((MainAdapter)recycler.getAdapter()).resetData(categories);
+
     }
 
     @Override
     public void returnMeals(Meals meals) {
+        progressBar.hide();
+        ((MealListAdapter)recycler.getAdapter()).resetData(meals);
     }
 
     @Override
     public void returnMeal(MealSingle meal) {
+
     }
 
     @Override

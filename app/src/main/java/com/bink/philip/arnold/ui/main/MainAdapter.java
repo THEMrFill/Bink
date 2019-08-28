@@ -6,20 +6,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bink.philip.arnold.MainActivityInterface;
 import com.bink.philip.arnold.R;
 import com.bink.philip.arnold.model.Categories;
 
 public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
     private Categories categories;
+    private MainActivityInterface mainActivityInterface;
 
-    public MainAdapter(Categories categories) {
+    MainAdapter(Categories categories, MainActivityInterface mainActivityInterface) {
         this.categories = categories;
+        this.mainActivityInterface = mainActivityInterface;
     }
 
     @NonNull
     @Override
     public MainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MainViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.main_recycler, parent, false));
+        return new MainViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.main_recycler, parent, false), mainActivityInterface);
     }
 
     @Override
@@ -32,7 +35,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainViewHolder> {
         return categories.categories.size();
     }
 
-    public void resetData(Categories categories) {
+    void resetData(Categories categories) {
         this.categories = categories;
         notifyDataSetChanged();
     }
